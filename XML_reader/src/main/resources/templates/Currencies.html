@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Currencies</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <script src="https://kit.fontawesome.com/4372e6eadc.js" crossorigin="anonymous"></script>
+
+  <style>
+    form button {
+      margin-left: 10px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+  <div class="container">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link text-dark" href="/home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-dark" href="/currencies"><b>Currencies</b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-dark" href="/rates">Last Rates</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-dark" href="/ratesFromTo">Rates for Period</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-dark" href="/calculator">Calculator</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <h1 class="p-3"><i class="fa fa-signal">&nbsp;</i>Currencies</h1>
+
+  <div class="row p-2">
+    <div class="col-md-4">
+      <form th:action="@{/currencies}" method="get" class="d-flex align-items-center">
+        <input id="txtSearch" type="text" class="form-control input-sm" name="keyword" placeholder="Search...">
+        <button class="btn btn-primary" type="submit">Go</button>
+        <button class="btn btn-secondary"><a href="/currencies" class="text-white text-decoration-none">Back</a>
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <table class="table table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th>Short Name</th>
+      <th>Name (EN)</th>
+      <th>Name (LT)</th>
+      <th>Code</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="currency : ${ccyList}">
+      <td th:text="${currency.code}"></td>
+      <td th:text="${currency.nameEN}"></td>
+      <td th:text="${currency.nameLT}"></td>
+      <td th:text="${currency.number}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!--<footer class="border-top bg-light text-muted text-center">-->
+<!--  <div class="container pb-5">-->
+<!--    &copy; [[${#dates.format(#dates.createNow(), 'yyyy')}]] - Currencies-->
+<!--  </div>-->
+<!--</footer>-->
+
+</body>
+</html>
